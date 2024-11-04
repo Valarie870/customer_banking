@@ -1,5 +1,32 @@
-"""Import the Account class from the Account.py file."""
-# ADD YOUR CODE HERE
+"""Import the Account class from the Accounts.py file."""
+# import Account.py 
+from Accounts import Account
+
+#Create instance of Account
+my_account = Account(balance=1000, interest=0.05)
+print(f"Initial balance: ${my_account.balance}")
+print(f"Interest rate: {my_account.interest * 100}%")
+
+#Update the balance and interest
+my_account.set_balance(1500)
+my_account.set_interest(0.07)
+print(f"Updated balance: ${my_account.balance}")
+print(f"Updated interest reate: {my_account.interest * 100}%")
+
+#Define SavingsAccount class
+class SavingsAccount:
+    def __init__(self, balance, interest_rate):
+        self.balance = balance
+        self.interest_rate = interest_rate
+
+    def calculate_interest(self, months):
+        return self.balance * (self.interest_rate / 100) * (months / 12)
+
+    def update_balance(self, interest):
+        self.balance += interest
+
+#import SavingsAccount class
+from savings_account import SavingsAccount
 
 # Define a function for the Savings Account
 def create_savings_account(balance, interest_rate, months):
@@ -14,6 +41,28 @@ def create_savings_account(balance, interest_rate, months):
         float: The updated savings account balance after adding the interest earned.
         And returns the interest earned.
     """
+    #create an instance of SavingsAccount
+    savings_account = SavingsAccount(balance, interest_rate)
+
+    #Calcuate the interest earned
+    interest_earned = savings_account.calculate_interest(months)
+
+    #Update the account balance with the interest earned
+    savings_account.update_balance(interest_earned)
+
+    #Return the updated balance and interest earned
+    return savings_account.balance, interest_earned
+
+    #Using
+    initial_balance = 1000.0
+    annual_interest_rate = 5.0
+    savings_period = 6
+
+    updated_balance, interest = create_savings_account(initial_balance, annual_interest_rate, savings_period)
+    print(f"Updated Balance: ${updated_balance:.2f}")
+    print(f"Interest Earned: ${interest:.2f}")
+
+
     # Create an instance of the `Account` class and pass in the balance and interest parameters.
     #  Hint: You need to add the interest as a value, i.e, 0.
     # ADD YOUR CODE HERE
